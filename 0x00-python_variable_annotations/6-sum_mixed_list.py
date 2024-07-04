@@ -10,4 +10,7 @@ def sum_mixed_list(mxd_lst: Union[int, float]) -> float:
     Args:
     mxd_lst: a list of floats.
     """
-    return sum(mxd_lst)
+    a = 0.00
+    for i in mxd_lst:
+        a = a + i
+    return a
