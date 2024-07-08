@@ -10,6 +10,11 @@ task_wait_random = __import__('3-tasks').task_wait_random
 
 
 async def task_wait_n(n: int, max_delay: int = 10) -> typing.List[float]:
+    """
+    Args:
+    n: int
+    max_delay: int with a defaul value of 10.
+    """
     ls = []
     for _ in range(0, n):
         x = await task_wait_random(max_delay)
