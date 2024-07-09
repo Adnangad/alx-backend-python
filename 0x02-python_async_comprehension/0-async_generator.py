@@ -2,12 +2,11 @@
 """
 This module contains an async gen function that generats numbers.
 """
-import typing
 import asyncio
 import random
 
 
-async def async_generator() -> typing.AsyncGenerator[float, None]:
+async def async_generator():
     """
     Yields numbers
     """
