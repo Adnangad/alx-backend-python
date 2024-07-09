@@ -4,6 +4,7 @@ Module that calculates the measure time for 4 parallel operations.
 """
 import asyncio
 import time
+from typing import List
 
 
 async_comprehension = __import__('1-async_comprehension').async_comprehension
@@ -14,7 +15,7 @@ async def measure_runtime() -> float:
     measures the time it takes to complete 4 async_comp routines
     """
     start: float = time.time()
-    batch = asyncio.gather(
+    batch: List[List[float]] = asyncio.gather(
             async_comprehension(),
             async_comprehension(),
             async_comprehension(),
