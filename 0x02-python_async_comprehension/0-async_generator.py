@@ -7,7 +7,7 @@ import asyncio
 import random
 
 
-async def async_generator() -> typing.AsyncGenerator[int, None]:
+async def async_generator() -> typing.AsyncGenerator[float, None]:
     """
     Yields numbers
     """
