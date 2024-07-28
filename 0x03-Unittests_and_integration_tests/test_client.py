@@ -3,7 +3,7 @@
 from unittest.mock import patch, Mock, PropertyMock
 import unittest
 from client import GithubOrgClient
-from utils import get_json, access_nested_map
+from utils import get_json
 from parameterized import parameterized
 
 
@@ -42,9 +42,9 @@ class TestGithubOrgClient(unittest.TestCase):
             mock_pub_rep.assert_called_once()
 
     @parameterized.expand([
-        ({"license": {"key": "my_license"}}, ("license", "key"), "my_license"),
-        ({"license": {"key": "other_license"}}, ("license", "key"), "my_license")
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False)
         ])
-    def test_has_license(self, repo, path, licensed_key):
+    def test_has_license(self, repo, licensed_key, expected):
         """ Tests the has license method"""
-        self.assertEqual(access_nested_map(repo, (path)), licensed_key)
+        self.assertEqual(GithubOrgClient.has_license(repo, licensed_key), expected)
