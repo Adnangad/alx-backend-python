@@ -6,6 +6,7 @@ from utils import access_nested_map
 
 
 class TestUtils(unittest.TestCase):
+    """ Tests functions in utils module"""
     @parameterized.expand([
         ({"a": 1}, ["a", ], 1),
         ({"a": {"b": 2}}, ["a", ], {"b": 2}),
