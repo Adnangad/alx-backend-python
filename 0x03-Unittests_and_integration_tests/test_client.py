@@ -3,7 +3,7 @@
 from unittest.mock import patch, Mock, PropertyMock
 import unittest
 from client import GithubOrgClient
-from utils import get_json
+from utils import get_json, access_nested_map
 from parameterized import parameterized
 
 
@@ -20,7 +20,6 @@ class TestGithubOrgClient(unittest.TestCase):
         examp.org()
         mock_get.assert_called_once_with(f'https://api.github.com/orgs/{rez}')
 
-
     def test_public_repos_url(self):
         """ Tests the case for public_repos_url method"""
         with patch.object(GithubOrgClient, '_public_repos_url', new_callable=PropertyMock) as mock_prop:
@@ -28,7 +27,6 @@ class TestGithubOrgClient(unittest.TestCase):
             instan = GithubOrgClient("google")
             self.assertEqual(instan._public_repos_url, "hello")
             mock_prop.assert_called_once()
-
 
     @patch('client.get_json')
     def test_public_repos(self, mock_get_json):
@@ -42,3 +40,11 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(rez, ["Adnan", "Obuya"])
             mock_get_json.assert_called_once_with('https://api.github.com/orgs/google/repos')
             mock_pub_rep.assert_called_once()
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, ("license", "key"), "my_license"),
+        ({"license": {"key": "other_license"}}, ("license", "key"), "my_license")
+        ])
+    def test_has_license(self, repo, path, licensed_key):
+        """ Tests the has license method"""
+        self.assertEqual(access_nested_map(repo, (path)), licensed_key)
