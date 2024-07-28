@@ -5,7 +5,7 @@ import unittest
 from utils import access_nested_map
 
 
-class TestUtils(unittest.TestCase):
+class TestAccessNestedMap(unittest.TestCase):
     """Tests functions in utils module"""
 
     @parameterized.expand([
