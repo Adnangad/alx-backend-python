@@ -84,5 +84,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         self.assertEqual(client.org, self.org_payload)
         self.assertEqual(client.repos_payload, self.repos_payload)
         self.assertEqual(client.public_repos(), self.expected_repos)
-        self.assertEqual(client.public_repos("apache-2.0"), self.apache2_repos)
+        self.assertEqual(client.public_repos(), self.expected_repos)
+        self.assertEqual(client.public_repos("XLICENSE"), [])
         self.mock.assert_called()
